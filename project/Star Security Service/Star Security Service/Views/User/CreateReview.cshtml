@@ -1,0 +1,52 @@
+﻿@model Star_Security_Service.Models.Testimonial
+
+@{
+    ViewData["Title"] = "CreateReview";
+    Layout = "_Layout";
+}
+
+<h2 class="text-center">Submit Your Review</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success text-center">@TempData["SuccessMessage"]</div>
+}
+
+
+<br />
+<br />
+<div class="container-xxl py-5">
+    <div class="container py-5 px-lg-5">
+        <div class="wow fadeInUp" data-wow-delay="0.1s">
+            <p class="section-title text-secondary justify-content-center"><span></span>START YOUR CAREER WITH US<span></span></p>
+            <h1 class="text-center mb-5">Fill This to Start</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="wow fadeInUp" data-wow-delay="0.3s">
+                    <form asp-action="CreateReview" method="post">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" asp-for="Name" class="form-control" id="name" placeholder="Your Name" readonly>
+                                    <label for="name" asp-for="Name">Your Name</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <textarea asp-for="Remarks" class="form-control" required></textarea>            
+                                    <label asp-for="Remarks" class="form-label">Your Feedback</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-12">
+                                    <input class="btn sendmsgbtn w-100 py-3 rounded-pill" type="submit" value="Send Message">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+﻿@model Star_Security_Service.Models.EmployeeInformation
+
+@{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "EditEmployeeRequest";
+    ViewData["Title"] = "CareerWithUs";
+}
+
+<br />
+
+<!-- Edit Employee Start -->
+<div class="container-xxl">
+    <div class="container py-5 px-lg-5">
+        <h1 class="text-center mb-5">Update Employee Information</h1>
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="wow fadeInUp" data-wow-delay="0.3s">
+                    <form asp-action="EditEmployeeRequest" method="post">
+                        <input type="hidden" asp-for="Id" />
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" asp-for="Name" class="form-control" id="name" readonly>
+                                    <label for="name">Name</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="email" asp-for="Email" class="form-control" id="email" readonly>
+                                    <label for="email">Email</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="tel" asp-for="Phonenumber" class="form-control" id="phonenumber" placeholder="Phone Number">
+                                    <label for="phonenumber">Phone Number</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" asp-for="Qualification" class="form-control" id="qualification" placeholder="Qualification">
+                                    <label for="qualification">Qualification</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" asp-for="Grade" class="form-control" id="grade" placeholder="Grade">
+                                    <label for="grade">Grade</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" asp-for="Client" class="form-control" id="client" placeholder="Client">
+                                    <label for="client">Client</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <textarea class="form-control" asp-for="Achievements" placeholder="Enter Achievements" id="achievements" style="height: 100px"></textarea>
+                                    <label for="achievements">Achievements</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <select asp-for="Action" class="form-control">
+                                        <option value="Freeze">Freeze</option>
+                                    </select>
+                                    <label for="Action">Action</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-info w-100 py-3 rounded-pill">Save Changes</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Edit Employee End -->

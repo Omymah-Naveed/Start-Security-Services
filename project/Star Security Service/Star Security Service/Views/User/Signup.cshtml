@@ -1,0 +1,167 @@
+﻿@model Star_Security_Service.Models.RegisterationUser
+
+@{
+    ViewData["Title"] = "Signup";
+}
+
+<style>
+    body {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f4f4f9;
+    }
+
+    .signup-container-l {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f4f4f9;
+    }
+
+    .signup-box {
+        max-width: 400px;
+        width: 100%;
+        padding: 20px;
+        background: #ffffff;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+        position: relative; /* 🔹 For positioning the eye icon */
+    }
+
+    .form-control {
+        height: 45px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        padding-right: 40px; /* 🔹 Space for eye icon */
+    }
+
+    .btn-primary {
+        width: 100%;
+        padding: 10px;
+        font-size: 18px;
+        border-radius: 5px;
+        background-color: #007bff;
+        border: none;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    .alert {
+        text-align: center;
+        font-size: 16px;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    /* 🔹 Eye Icon Styling */
+    .toggle-password {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #888;
+        font-size: 18px;
+    }
+
+        .toggle-password:hover {
+            color: #333;
+        }
+</style>
+
+<h1 class="text-center">Signup</h1>
+
+@if (TempData["ErrorMessageUserSignup"] != null)
+{
+    <script>
+        window.onload = function() {
+            var myModal = new bootstrap.Modal(document.getElementById('messageModal'));
+            myModal.show();
+        };
+    </script>
+
+    <!-- Bootstrap Modal -->
+    <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+        <div class="modal-dialog rounded">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h5 class="text-black text-center"> @TempData["ErrorMessageUserSignup"]</h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger w-100 rounded-pill" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="login-container-l d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="signup-box">
+        <h1 class="text-center">Sign Up</h1>
+
+        <form asp-action="Signup" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger text-center"></div>
+
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" type="text" placeholder="Enter your full name" required />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" type="email" placeholder="Enter your email address" required />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" type="password" id="passwordInput" placeholder="Enter your password" required />
+                <span class="toggle-password mt-1" onclick="togglePassword()">
+                    <i class="fas fa-eye mt-3" id="eyeIcon"></i>
+                </span>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-group text-center">
+                <input type="submit" value="Sign Up" class="btn btn-danger w-50 rounded-pill" />
+            </div>
+
+            <div class="text-center mt-3">
+                <p class="text-dark">Already have an account? <a asp-controller="User" asp-action="Login">Login</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script>
+    function togglePassword() {
+        var passwordField = document.getElementById("passwordInput");
+        var eyeIcon = document.getElementById("eyeIcon");
+
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            eyeIcon.classList.remove("fa-eye");
+            eyeIcon.classList.add("fa-eye-slash"); // Change icon
+        } else {
+            passwordField.type = "password";
+            eyeIcon.classList.remove("fa-eye-slash");
+            eyeIcon.classList.add("fa-eye"); // Change icon back
+        }
+    }
+</script>

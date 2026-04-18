@@ -1,0 +1,153 @@
+﻿@model Star_Security_Service.Models.Contact
+@{
+    ViewData["Title"] = "Contact";
+}
+@{
+    var userName = Context.Session.GetString("username") ?? "";
+    var userEmail = Context.Session.GetString("useremail") ?? "";
+}
+
+@if (TempData["SuccessMessageContact"] != null)
+{
+    <script>
+        window.onload = function () {
+            var myModal = new bootstrap.Modal(document.getElementById('messageModal'));
+            myModal.show();
+        };
+    </script>
+
+    <!-- Bootstrap Modal -->
+    <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+        <div class="modal-dialog rounded">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h5 class="text-black text-center">@TempData["SuccessMessageContact"]</h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger w-100 rounded-pill" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<br />
+<!-- Contact Start -->
+<div class="container-xxl py-5">
+    <div class="container py-5 px-lg-5">
+        <div class="wow fadeInUp" data-wow-delay="0.1s">
+            @* <p class="section-title text-secondary justify-content-center"><span></span>Contact Us<span></span></p> *@
+            <p class="section-title text-secondary justify-content-center" style="font-size:20px; font-weight:bold;"><span></span>Contact us<span></span></p>
+            <h1 class="text-center mb-5">Contact For Any Query</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="wow fadeInUp" data-wow-delay="0.3s">
+                    <form asp-action="ContactAddData" method="post" id="contactForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" asp-for="Name" class="form-control" id="name" placeholder="Your Name" value="@userName" readonly>
+                                    <label for="name" asp-for="Name">Your Name</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="email" asp-for="Email" class="form-control" id="email" placeholder="Your Email" value="@userEmail" readonly>
+                                    <label for="email" asp-for="Email">Your Email</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="tel" asp-for="Phonenumber" class="form-control" id="phonenumber" placeholder="Phone Number" required pattern="^\d{10,15}$">
+                                    <label for="phonenumber" asp-for="Phonenumber">Phone Number</label>
+                                    <small class="text-danger" id="phoneError" style="display: none;">Enter a valid phone number (10-15 digits).</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" asp-for="Subject" class="form-control" id="subject" placeholder="Subject" required minlength="5">
+                                    <label for="subject" asp-for="Subject">Subject</label>
+                                    <small class="text-danger" id="subjectError" style="display: none;">Subject must be at least 5 characters long.</small>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <textarea class="form-control" asp-for="Message" placeholder="Leave a message here" id="message" style="height: 150px" required minlength="10" maxlength="250"></textarea>
+                                    <label for="message" asp-for="Message">
+                                        Message                                    <small id="charCount" class="text-muted">(250) </small>
+                                    </label>
+                                    <small class="text-danger" id="messageError" style="display: none;">Message must be between 10 and 250 characters.</small>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <input class="btn sendmsgbtn w-100 py-3 rounded-pill" type="submit" value="Send Message">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Contact End -->
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var phoneInput = document.getElementById("phonenumber");
+        var subjectInput = document.getElementById("subject");
+        var messageInput = document.getElementById("message");
+
+        var phoneError = document.getElementById("phoneError");
+        var subjectError = document.getElementById("subjectError");
+        var messageError = document.getElementById("messageError");
+        var charCount = document.getElementById("charCount");
+
+        // Phone Number Validation
+        phoneInput.addEventListener("input", function () {
+            var regex = /^\d{10,15}$/;
+            if (!regex.test(phoneInput.value)) {
+                phoneError.style.display = "block";
+            } else {
+                phoneError.style.display = "none";
+            }
+        });
+
+        // Subject Validation
+        subjectInput.addEventListener("input", function () {
+            if (subjectInput.value.length < 5) {
+                subjectError.style.display = "block";
+            } else {
+                subjectError.style.display = "none";
+            }
+        });
+
+        // Message Character Counter
+        messageInput.addEventListener("input", function () {
+            var remaining = 250 - messageInput.value.length;
+            charCount.textContent = remaining + " characters remaining";
+
+            if (messageInput.value.length < 10 || messageInput.value.length > 250) {
+                messageError.style.display = "block";
+            } else {
+                messageError.style.display = "none";
+            }
+        });
+
+        // Form Validation Before Submission
+        document.getElementById("contactForm").addEventListener("submit", function (event) {
+            if (!phoneInput.value.match(/^\d{10,15}$/)) {
+                phoneError.style.display = "block";
+                event.preventDefault();
+            }
+            if (subjectInput.value.length < 5) {
+                subjectError.style.display = "block";
+                event.preventDefault();
+            }
+            if (messageInput.value.length < 10 || messageInput.value.length > 250) {
+                messageError.style.display = "block";
+                event.preventDefault();
+            }
+        });
+    });
+</script>

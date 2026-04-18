@@ -1,0 +1,92 @@
+﻿@model Star_Security_Service.Models.EmployeeInformationViewModel
+
+@{
+    ViewData["Title"] = "CareerWithUs";
+}
+
+
+<br />
+<br />
+<div class="container-xxl py-5">
+    <div class="container py-5 px-lg-5">
+        <div class="wow fadeInUp" data-wow-delay="0.1s">
+            @* <p class="section-title text-secondary justify-content-center"><span></span>START YOUR CAREER WITH US<span></span></p> *@
+            <p class="section-title text-secondary justify-content-center" style="font-size:20px; font-weight:bold;"><span></span>Start Your Career  With Us<span></span></p>
+            <h1 class="text-center mb-5">Fill This to Start</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="wow fadeInUp" data-wow-delay="0.3s">
+                    <form asp-action="CareerWithUs" method="post">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" asp-for="Name" class="form-control" id="name" placeholder="Your Name" readonly>
+                                    <label for="name" asp-for="Name">Your Name</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="email" asp-for="Email" class="form-control" id="email" placeholder="Your Email" readonly>
+                                    <label for="email" asp-for="Email">Your Email</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" asp-for="Address" class="form-control" placeholder="Your Address" required />
+                                    <label for="text" asp-for="Address" class="control-label">Your Address</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="tel" asp-for="Phonenumber" class="form-control" placeholder="Your Phone Number" required />
+                                    <label for="tel" asp-for="Phonenumber" class="control-label">Your Phone Number</label>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" asp-for="Qualification" class="form-control" placeholder="Your Qualification" required/>
+                                    <label for="text" asp-for="Qualification" class="control-label">Your Qualification</label>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <select asp-for="ServiceId" class="form-control" required placeholder="Choose a Service">
+                                        <option value="1">formal guading</option>
+                                        <option value="2">Fire Squad</option>
+                                        <option value="3">Body Guards</option>
+                                        <option value="4">Dog Squad</option>
+                                        <option value="5">Cash Service</option>
+                                       @*  @foreach (var service in Model.Services)
+                                        {
+                                            <option value="@service.Title">@service.Id</option>
+                                        } *@
+                                    </select>
+                                    <label for="list" class="control-label" asp-for="ServiceId">Choose a Service</label>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <input type="text" asp-for="Achievements" class="form-control w-100" placeholder="Your Achievements (if any)" />
+                                    <label for="text" asp-for="Achievements" class="control-label">Your Achievements (if any)</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-12">
+                                    <input class="btn sendmsgbtn w-100 py-3 rounded-pill" type="submit" value="Send Message">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

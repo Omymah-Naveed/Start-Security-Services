@@ -1,0 +1,45 @@
+﻿@model Star_Security_Service.Models.MannedGuardingModelView
+
+@{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "EditMannedGuarding";
+    ViewData["Title"] = "MannedGuarding";
+}
+<div class="container-xxl">
+    <div class="container py-5 px-lg-5">
+        <h1 class="text-center mb-5">Update Services</h1>
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="wow fadeInUp" data-wow-delay="0.3s">
+                    <form asp-action="EditMannedGuarding" method="post">
+                        <input type="hidden" asp-for="Id" />
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input asp-for="Title" class="form-control" required />
+                                    <label asp-for="Title" class="form-label">Title</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <textarea asp-for="Description" class="form-control" required></textarea>
+                                    <label asp-for="Description" class="form-label">Description</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input asp-for="Items" class="form-control" required />
+                                    <label asp-for="Items" class="form-label">Item</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-info w-100 py-3 rounded-pill">Update</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

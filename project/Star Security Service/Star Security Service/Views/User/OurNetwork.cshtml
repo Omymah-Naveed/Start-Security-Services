@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Star_Security_Service.Models.Network>
+
+@{
+    ViewData["Title"] = "OurNetwork";
+    Layout = "_Layout";
+}
+
+<br />
+<br />
+
+<!-- Networks Start -->
+<div class="container-xxl py-5">
+    <div class="container py-5 px-lg-5">
+        <div class="wow fadeInUp" data-wow-delay="0.1s">
+            @* <p class="section-title text-secondary justify-content-center"><span></span>Our Network<span></span></p> *@
+            <p class="section-title text-secondary justify-content-center" style="font-size:20px; font-weight:bold;"><span></span>Our Network<span></span></p>
+            <h1 class="text-center mb-5">Star Security – Protecting Every Region, Every Time.</h1>
+        </div>
+        <div class="row mt-n2 wow fadeInUp" data-wow-delay="0.3s">
+            @* <div class="col-12 text-center"> *@
+            @*     <ul class="list-inline mb-5" id="portfolio-flters"> *@
+            @*         <li class="mx-2 active" data-filter="*">All</li> *@
+            @*         <li class="mx-2" data-filter=".first">North Region</li> *@
+            @*         <li class="mx-2" data-filter=".second">West Region</li> *@
+            @*         <li class="mx-2" data-filter=".third">East Region</li> *@
+            @*         <li class="mx-2" data-filter=".fourth">South Region</li> *@
+            @*     </ul> *@
+            @* </div> *@
+        </div>
+        <div class="row g-4 portfolio-container">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 col-md-6 portfolio-item wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="rounded overflow-hidden">
+                        <div class="position-relative overflow-hidden">
+                            @* Ignore image section as per your request *@
+                            <div class="portfolio-overlay">
+                                <a class="btn btn-square btn-outline-light mx-1" href="" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
+                            </div>
+                        </div>
+                        <div class="bg-light p-4">
+                            <h3 class="text-danger mb-2 text-center" style="font-weight: bold;">@item.Title</h3>
+                            <p class="lh-base mb-0">
+                                <i class="fa fa-map-marker-alt" style="margin-right: 10px;"></i> @item.Location<br>
+                                <i class="fa fa-phone-alt" style="margin-right: 10px;"></i> @item.Cell<br>
+                                <i class="fa fa-envelope" style="margin-right: 10px;"></i> <a href="mailto:@item.Email">@item.Email</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

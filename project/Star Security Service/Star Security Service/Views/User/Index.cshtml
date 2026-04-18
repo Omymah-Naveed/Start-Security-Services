@@ -1,0 +1,391 @@
+﻿@model IndexViewModel;
+@{
+    ViewData["Title"] = "Index";
+}
+@{
+    Layout = "_Layout";
+}
+@{
+    var userEmail = Context.Session.GetString("useremail");
+    var isAccepted = false;
+
+    if (!string.IsNullOrEmpty(userEmail))
+    {
+        var employeeRecord = db.EmployeeInformations.FirstOrDefault(e => e.Email == userEmail);
+        if (employeeRecord != null && (employeeRecord.Action == "Accepted" || employeeRecord.Action == "Freeze"))
+        {
+            isAccepted = true;
+        }
+    }
+
+}
+    @inject Star_Security_Service.Data.Star_security_ServiceContext db
+<style>
+    /* Change background color of Next & Prev buttons */
+    .carousel-control-prev,
+    .carousel-control-next {
+        background-color: rgba(255, 0, 0, 0.7); /* Change to red with transparency */
+        width: 50px; /* Adjust button size */
+        height: 50px;
+        border-radius: 50%; /* Make it circular */
+    }
+
+    /* Change the arrow color */
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        filter: invert(100%); /* Makes the icon white */
+    }
+
+    /* Hover effect */
+    .carousel-control-prev:hover,
+    .carousel-control-next:hover {
+        background-color: rgba(200, 0, 0, 1); /* Darker red */
+    }
+
+    <style >
+    .custom-carousel-btn {
+        background-color: rgba(255, 0, 0, 0.8);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .custom-carousel-btn:hover {
+        background-color: rgba(200, 0, 0, 1);
+    }
+
+    .custom-carousel-btn span {
+        filter: invert(100%); /* Makes the arrow white */
+    }
+
+    .custom-carousel-btn {
+        background-color: rgba(255, 0, 0, 0.8); /* Red color */
+        width: 50px;
+        height: 50px;
+        border-radius: 50%; /* Circular buttons */
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10; /* Ensure it's above other elements */
+        position: relative; /* Keep it inside the container */
+    }
+
+        .custom-carousel-btn:hover {
+            background-color: rgba(200, 0, 0, 1); /* Darker red */
+        }
+
+        .custom-carousel-btn span {
+            filter: invert(100%); /* Makes the arrow white */
+        }
+</style>
+@if (TempData["SuccessMessageLogin"] != null)
+{
+    <script>
+        window.onload = function() {
+            var myModal = new bootstrap.Modal(document.getElementById('messageModal'));
+            myModal.show();
+        };
+    </script>
+
+    <!-- Bootstrap Modal -->
+    <div class="modal fade rounded" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+        <div class="modal-dialog rounded">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h5 class="text-black text-center">@TempData["SuccessMessageLogin"]</h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger w-100 rounded-pill" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (TempData["ErrorMessagefrozen"] != null)
+{
+    <script>
+        window.onload = function() {
+            var myModal = new bootstrap.Modal(document.getElementById('messageModal'));
+            myModal.show();
+        };
+    </script>
+
+    <!-- Bootstrap Modal -->
+    <div class="modal fade rounded" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+        <div class="modal-dialog rounded">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h5 class="text-black text-center">@TempData["ErrorMessagefrozen"]</h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger w-100 rounded-pill" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<!-- Hero Start -->
+<div class="container-xxl bg-dark hero-header py-5">
+    <div class="container px-lg-5">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6 text-center text-lg-start">
+                <h1 class="text-danger mb-3 animated slideInDown">STAR Security Services</h1>
+                <p class="text-white mb-4 animated slideInDown">
+                    Star Security Services is committed to providing top-tier security solutions. 
+                    Our expert team ensures the safety of businesses, homes, and events with 
+                    advanced security measures and a customer-first approach. Trust Star Security 
+                    Services—your shield of safety and peace of mind.
+                </p>
+                <div class="d-flex justify-content-center justify-content-lg-start">
+                    @* <a href="#" class="btn btn-secondary py-3 px-4 rounded-pill me-3 animated slideInLeft">Contact Us</a> *@
+                    @* <a href="#" class="btn btn-light py-3 px-4 rounded-pill animated slideInRight">Contact Us</a> *@
+                </div>
+            </div>
+            <div class="col-lg-6 text-center mt-4">
+                <img class="img-fluid animated zoomIn" src="~/img/hero1.png" alt="Hero Image" style="max-width: 90%;">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Hero End -->
+
+
+<!-- Feature Start -->
+@* <div class="container-xxl py-5"> *@
+@*     <div class="container py-5 px-lg-5"> *@
+@*         <div class="row g-4"> *@
+@*             <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.1s"> *@
+@*                 <div class="feature-item bg-light rounded text-center p-4"> *@
+@*                     <i class="fa fa-3x fa-mail-bulk text-primary mb-4"></i> *@
+@*                     <h5 class="mb-3">Digital Marketing</h5> *@
+@*                     <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p> *@
+@*                 </div> *@
+@*             </div> *@
+@*             <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.3s"> *@
+@*                 <div class="feature-item bg-light rounded text-center p-4"> *@
+@*                     <i class="fa fa-3x fa-search text-primary mb-4"></i> *@
+@*                     <h5 class="mb-3">SEO & Backlinks</h5> *@
+@*                     <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p> *@
+@*                 </div> *@
+@*             </div> *@
+@*             <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.5s"> *@
+@*                 <div class="feature-item bg-light rounded text-center p-4"> *@
+@*                     <i class="fa fa-3x fa-laptop-code text-primary mb-4"></i> *@
+@*                     <h5 class="mb-3">Design & Development</h5> *@
+@*                     <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p> *@
+@*                 </div> *@
+@*             </div> *@
+@*         </div> *@
+@*     </div> *@
+@* </div> *@
+<!-- Feature End -->
+<!-- About Start -->
+<div class="container-xxl py-5">
+    <div class="container py-5 px-lg-5">
+        <div class="wow fadeInUp" data-wow-delay="0.1s">
+            <p class="section-title text-secondary justify-content-center" style="font-size:20px; font-weight:bold;"><span></span>About Us<span></span></p>
+            <h1 class="text-center mb-5">Get to Know Us</h1>
+        </div>        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                <h1 class="mb-5">Star Security Service 25 Years of Experience</h1>
+                <p class="mb-4" style="font-size:18px; color: black;"> <span style="font-weight:bold; font-size:20px; color:#dc2028;">Star Security Services</span> was founded with a mission to provide top-tier security solutions tailored to the needs of businesses and individuals. Established in <mark style="font-weight:bold;">2000</mark>, the company began as a small team of dedicated professionals committed to ensuring safety and peace of mind for clients. Over the years, Star Security Services expanded its operations, integrating advanced technology and highly trained personnel to offer comprehensive security services, including surveillance, on-site guards, and risk assessment. With a reputation for reliability and excellence, the company has grown into a trusted name in the security industry, serving a diverse range of clients across various sectors. Today, Star Security Services continues to uphold its core values of integrity, professionalism, and innovation, ensuring the highest standards of protection for all.</p>
+               
+            </div>
+            <div class="col-lg-6">
+                <img class="img-fluid wow zoomIn" data-wow-delay="0.5s" src="~/logo/Logo02.png">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About End -->
+<!-- Facts Start -->
+        <h2 class="text-center text-danger mb-0">Trusted Security Services with Proven Excellence</h2>
+<div class="container-xxl bg-dark fact py-5 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container py-5 px-lg-5">
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.1s">
+                <i class="fa fa-shield-alt fa-3x text-secondary mb-3"></i>
+                <h1 class="text-white mb-2"><span data-toggle="counter-up">20</span>+</h1>
+                <p class="text-white mb-0">Years of Security Excellence</p>
+            </div>
+            <div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.3s">
+                <i class="fa fa-user-shield fa-3x text-secondary mb-3"></i>
+                <h1 class="text-white mb-2"><span data-toggle="counter-up">500</span>+</h1>
+                <p class="text-white mb-0">Highly Trained Security Personnel</p>
+            </div>
+            <div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.5s">
+                <i class="fa fa-building fa-3x text-secondary mb-3"></i>
+                <h1 class="text-white mb-2"><span data-toggle="counter-up">1000</span>+</h1>
+                <p class="text-white mb-0">Protected Businesses & Properties</p>
+            </div>
+            <div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.7s">
+                <i class="fa fa-smile fa-3x text-secondary mb-3"></i>
+                <h1 class="text-white mb-2"><span data-toggle="counter-up">10,000</span>+</h1>
+                <p class="text-white mb-0">Happy & Secure Clients</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Facts End -->
+<!-- Service Start -->
+<div class="container-xxl py-5">
+    <div class="container py-5 px-lg-5">
+        <div class="wow fadeInUp" data-wow-delay="0.1s">
+            <p class="section-title text-secondary justify-content-center" style="font-size:20px; font-weight:bold;"><span></span>Our Services<span></span></p>
+            <h1 class="text-center mb-5">What Services We Provide</h1>
+        </div>
+
+        <!-- Bootstrap Multi-Item Carousel -->
+        <div id="serviceCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                @if (Model.Man != null && Model.Man.Any())
+                {
+                    var itemsPerSlide = 3;
+                    var totalItems = Model.Man.Count;
+                    var slideIndex = 0;
+
+                    for (int i = 0; i < totalItems; i += itemsPerSlide)
+                    {
+                        <div class="carousel-item @(slideIndex == 0 ? "active" : "")">
+                            <div class="row justify-content-center">
+                                @for (int j = i; j < i + itemsPerSlide && j < totalItems; j++)
+                                {
+                                    var item = Model.Man[j];
+                                    <div class="col-lg-4 col-md-6 d-flex">
+                                        <div class="card border-0 shadow-sm w-100">
+                                            <div class="position-relative">
+                                                @if (!string.IsNullOrEmpty(item.ImagePath))
+                                                {
+                                                    <img class="img-fluid w-100 rounded" src="~/img/@item.ImagePath" alt="Service Image" />
+                                                }
+                                            </div>
+                                            <div class="card-body text-center bg-light">
+                                                <h3 class="text-danger fw-bold mb-2">@item.Title</h3>
+                                                <h5 class="lh-base mb-0">@item.Description</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        slideIndex++;
+                    }
+                }
+                else
+                {
+                    <div class="carousel-item active">
+                        <p class="text-center text-danger fw-bold">No services available.</p>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center mt-3">
+            <button class="custom-carousel-btn me-3" type="button" data-bs-target="#serviceCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </button>
+            <button class="custom-carousel-btn" type="button" data-bs-target="#serviceCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </button>
+        </div>
+
+ 
+
+    </div>
+</div>
+<!-- Service End -->
+
+
+<!-- Networks Start -->
+<div class="container-xxl py-5">
+    <div class="container py-5 px-lg-5">
+        <div class="wow fadeInUp" data-wow-delay="0.1s">
+            @* <p class="section-title text-secondary justify-content-center"><span></span>Our Network<span></span></p> *@
+            <p class="section-title text-secondary justify-content-center" style="font-size:20px; font-weight:bold;"><span></span>Our Network<span></span></p>
+            <h1 class="text-center mb-5">Star Security – Protecting Every Region, Every Time.</h1>
+        </div>
+        <div class="row mt-n2 wow fadeInUp" data-wow-delay="0.3s">
+            @* <div class="col-12 text-center"> *@
+            @*     <ul class="list-inline mb-5" id="portfolio-flters"> *@
+            @*         <li class="mx-2 active" data-filter="*">All</li> *@
+            @*         <li class="mx-2" data-filter=".first">North Region</li> *@
+            @*         <li class="mx-2" data-filter=".second">West Region</li> *@
+            @*         <li class="mx-2" data-filter=".third">East Region</li> *@
+            @*         <li class="mx-2" data-filter=".fourth">South Region</li> *@
+            @*     </ul> *@
+            @* </div> *@
+        </div>
+        <div class="row g-4 portfolio-container">
+            @foreach (var item in Model.Net)
+            {
+                <div class="col-lg-4 col-md-6 portfolio-item wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="rounded overflow-hidden">
+                        <div class="position-relative overflow-hidden">
+                            @* Ignore image section as per your request *@
+                            <div class="portfolio-overlay">
+                                <a class="btn btn-square btn-outline-light mx-1" href="" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
+                            </div>
+                        </div>
+                        <div class="bg-light p-4">
+                            <h3 class="text-danger mb-2 text-center" style="font-weight: bold;">@item.Title</h3>
+                            <p class="lh-base mb-0">
+                                <i class="fa fa-map-marker-alt" style="margin-right: 10px;"></i> @item.Location<br>
+                                <i class="fa fa-phone-alt" style="margin-right: 10px;"></i> @item.Cell<br>
+                                <i class="fa fa-envelope" style="margin-right: 10px;"></i> <a href="mailto:@item.Email">@item.Email</a>
+                            </p>
+                            
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Testimonial Start -->
+<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container py-5 px-lg-5">
+        <p class="section-title text-secondary justify-content-center" style="font-size:20px; font-weight:bold;"><span></span>Reviews<span></span></p>
+        <h1 class="text-center mb-5">What Say Our Clients!</h1>
+
+        <div class="owl-carousel testimonial-carousel">
+                @if (Model.Tes != null && Model.Tes.Any())
+                {
+                    foreach (var item in Model.Tes)
+                    {
+                    <div class="testimonial-item bg-light rounded p-4">
+                        <p class="fs-5 text-dark">
+                            <i class="fa fa-quote-left fa-4x text-danger mt-4 me-3"></i> @item.Remarks
+                        </p>
+                        <div class="d-flex align-items-center">
+                            <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial_user.png" style="width: 100px; height: 100px;">
+                            <div class="ps-4">
+                                <h5 class="mb-1">@item.Name</h5>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                }
+                else
+                {
+                <div class="carousel-item active">
+                    <p class="text-center text-danger fw-bold">No Review Available.</p>
+                </div>
+                }
+        </div>
+
+            @if (!isAccepted)
+            {
+            <div class="text-center">
+                <a asp-controller="User" asp-action="CreateReview" class="btn rounded-pill btn-danger w-50 mt-3">Review Us</a>
+            </div>
+            }
+    </div>
+</div>
+<!-- Testimonial End -->

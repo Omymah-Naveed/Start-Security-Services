@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Star_Security_Service.Models.RegisterationUser>
+
+@{
+    ViewData["Title"] = "UserLogInfo";
+}
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Arial', sans-serif;
+    }
+
+    /* 🌟 Centered Title */
+    .page-title {
+        text-align: center;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 20px;
+        padding-top: 10px;
+    }
+
+    .table {
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    /* 🌟 Button Styling */
+    .btn-accept {
+        background: #28a745;
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 5px;
+        font-size: 14px;
+        transition: 0.3s;
+    }
+
+        .btn-accept:hover {
+            background: #218838;
+        }
+
+</style>
+<h2 class="page-title">User Information</h2>
+
+
+<div class="table-responsive">
+    <table class="table table-striped table-bordered text-center rounded-lg">
+        <thead class="rounded-top">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Password)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Password)
+                    </td>
+                    @* <td> *@
+                    @*     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> | *@
+                    @*     <a asp-action="Details" asp-route-id="@item.Id">Details</a> | *@
+                    @*     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> *@
+                    @* </td> *@
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
